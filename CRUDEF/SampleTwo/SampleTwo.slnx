@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="SampleCrud.DTO/SampleCrud.Contracts.csproj" />
+  <Project Path="SampleTwoCRUD/SampleTwoCRUD.csproj" />
+</Solution>
