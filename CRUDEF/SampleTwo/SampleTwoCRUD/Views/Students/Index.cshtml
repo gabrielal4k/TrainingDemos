@@ -1,0 +1,50 @@
+﻿@using SampleCrud.Contracts.Entities
+@model List<Students>
+@{
+}
+<div class="card">
+    <div class="card-header">
+        <div class="row">
+            <h4 class="col">MY STUDENTS</h4>
+            <div class="col">
+                @* <button class="btn btn-primary float-end">Add Student</button> *@
+                <a asp-action="Add" class="btn btn-primary">Add Student</a>
+            </div>
+        </div>
+    </div>
+    <div class="card-body">
+        <table class="table table-light table-hover" id="tblStudent">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Phone</th>
+                    <th>Address</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var dto in Model)
+                {
+                    <tr>
+                        <td>@dto.FirstName @dto.MiddleName @dto.LastName</td>
+                        <td>@dto.Email</td>
+                        <td>@dto.Phone</td>
+                        <td>@dto.Address</td>
+                        <td>
+                            <a asp-action="Edit" asp-route-id="@dto.StudentId" class="btn btn-primary"></a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+@section Scripts{
+    
+    <script>
+        $(function(){
+            console.log('Loaded!');
+        });
+    </script>
+
+}
