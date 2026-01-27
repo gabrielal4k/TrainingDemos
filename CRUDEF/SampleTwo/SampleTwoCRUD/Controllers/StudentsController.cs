@@ -24,7 +24,15 @@ public class StudentsController : Controller
         return View(dtos);
     }
 
-    public async Task<IActionResult> AddStudent([Bind("StudentId,Email,FirstName,LastName")] DTOStudent dto)
+    [HttpGet]
+    public IActionResult Add()
+    {
+        return View("StudentCRUD");
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> AddStudent(
+        [Bind("Phone,Email,Address,FirstName,MiddleName,LastName")] DTOStudent dto)
     {
         if(ModelState.IsValid)
         {
@@ -32,6 +40,7 @@ public class StudentsController : Controller
             {
                 StudentId = dto.StudentId,
                 FirstName = dto.FirstName!,
+                MiddleName = dto.MiddleName!,
                 LastName = dto.LastName!,
                 Email = dto.Email!,
                 Phone = dto.Phone,

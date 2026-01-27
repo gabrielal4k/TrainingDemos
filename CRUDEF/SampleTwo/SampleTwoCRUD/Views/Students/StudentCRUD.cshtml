@@ -1,5 +1,46 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@using SampleCrud.Contracts.Entities
+
+@model Students
 @{
 }
+<div >
+    <h4>Create Student</h4>
+    <hr />
+    <form asp-action="AddStudent">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="mb-2">
+            <label asp-for="FirstName" class="form-label"></label>
+            <input asp-for="FirstName" class="form-control" />
+            <span asp-validation-for="FirstName" class="text-bg-danger"></span>
+        </div>
+        <div class="mb-2">
+            <label asp-for="MiddleName" class="form-label"></label>
+            <input asp-for="MiddleName" class="form-control" />
+            <span asp-validation-for="MiddleName" class="text-bg-danger"></span>
+        </div>
+        <div class="mb-2">
+            <label asp-for="LastName" class="form-label"></label>
+            <input asp-for="LastName" class="form-control" />
+            <span asp-validation-for="LastName" class="text-bg-danger"></span>
+        </div>
+        <div class="mb-2">
+            <label asp-for="Email" class="form-label"></label>
+            <input asp-for="Email" class="form-control" />
+            <span asp-validation-for="Email" class="text-bg-danger"></span>
+        </div>
+        <div class="mb-2">
+            <label asp-for="Phone" class="form-label"></label>
+            <input asp-for="Phone" class="form-control" />
+            <span asp-validation-for="Phone" class="text-bg-danger"></span>
+        </div>
+        <div class="mb-2">
+            <label asp-for="Address" class="form-label"></label>
+            <input asp-for="Address" class="form-control" />
+            <span asp-validation-for="Address" class="text-bg-danger"></span>
+        </div>
+        <div class="mb-3">
+            <button type="submit" value="Save" class="btn btn-primary">Save Changes</button>
+            <button  value="Save" class="btn btn-danger">Cancel</button>
+        </div>
+    </form>
+</div>
