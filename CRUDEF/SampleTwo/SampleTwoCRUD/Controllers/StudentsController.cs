@@ -27,7 +27,10 @@ public class StudentsController : Controller
     [HttpGet]
     public IActionResult Add()
     {
-        return View("StudentCRUD");
+        DTOStudent dto = new DTOStudent();
+        dto.StudentId = 0;
+
+        return View("StudentCRUD", dto);
     }
 
     [HttpPost]
@@ -47,6 +50,61 @@ public class StudentsController : Controller
                 Address = dto.Address
             };
             _context.Add(students);
+            await _context.SaveChangesAsync();
+
+            return RedirectToAction(nameof(Index));
+        }
+
+        return View(dto);
+    }
+
+    [HttpGet]
+    public async Task<IActionResult> MoveEdit(int? id)
+    {
+        if (id is null or 0)
+            return NotFound();
+
+        var student = await _context.Students.FindAsync(id);
+
+        if (student is null)
+            return NotFound();
+
+        DTOStudent dto = new()
+        {
+            StudentId = student.StudentId,
+            FirstName = student.FirstName,
+            MiddleName = student.MiddleName,
+            LastName = student.LastName,
+            Email = student.Email,
+            Phone = student.Phone,
+            Address = student.Address
+        };
+
+        return View("StudentCRUD", dto);
+    }
+
+
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> EditStudent(int StudentId,
+        [Bind("StudentId,Phone,Email,Address,FirstName,MiddleName,LastName")] DTOStudent dto)
+    {
+        if (StudentId != dto.StudentId)
+            return NotFound();
+
+        if (ModelState.IsValid)
+        {
+            Students students = new Students
+            {
+                StudentId = dto.StudentId,
+                FirstName = dto.FirstName!,
+                MiddleName = dto.MiddleName!,
+                LastName = dto.LastName!,
+                Email = dto.Email!,
+                Phone = dto.Phone,
+                Address = dto.Address
+            };
+            _context.Update(students);
             await _context.SaveChangesAsync();
 
             return RedirectToAction(nameof(Index));

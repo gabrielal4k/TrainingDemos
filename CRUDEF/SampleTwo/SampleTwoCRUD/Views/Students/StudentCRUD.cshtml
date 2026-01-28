@@ -1,13 +1,19 @@
-﻿@using SampleCrud.Contracts.Entities
+﻿@using SampleCrud.Contracts.DTO
+@using SampleCrud.Contracts.Entities
 
-@model Students
+@model DTOStudent
 @{
+    string aspAction = "AddStudent";
+
+    if (Model.StudentId > 0)
+        aspAction = "EditStudent";
 }
 <div >
     <h4>Create Student</h4>
     <hr />
-    <form asp-action="AddStudent">
+    <form asp-action="@aspAction">
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        @Html.HiddenFor(m => m.StudentId);
         <div class="mb-2">
             <label asp-for="FirstName" class="form-label"></label>
             <input asp-for="FirstName" class="form-control" />

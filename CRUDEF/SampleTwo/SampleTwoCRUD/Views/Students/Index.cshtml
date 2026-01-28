@@ -31,7 +31,8 @@
                         <td>@dto.Phone</td>
                         <td>@dto.Address</td>
                         <td>
-                            <a asp-action="Edit" asp-route-id="@dto.StudentId" class="btn btn-primary"></a>
+                            <a asp-action="MoveEdit" asp-route-id="@dto.StudentId" class="btn btn-primary">Edit</a>
+                            <a asp-action="Delete" asp-route-id="@dto.StudentId" class="btn btn-danger">Delete</a>
                         </td>
                     </tr>
                 }
