@@ -1,4 +1,5 @@
 ﻿@using SampleCrud.Contracts.Entities
+@Html.AntiForgeryToken
 @model List<Students>
 @{
 }
@@ -31,8 +32,11 @@
                         <td>@dto.Phone</td>
                         <td>@dto.Address</td>
                         <td>
-                            <a asp-action="MoveEdit" asp-route-id="@dto.StudentId" class="btn btn-primary">Edit</a>
-                            <a asp-action="Delete" asp-route-id="@dto.StudentId" class="btn btn-danger">Delete</a>
+                           <form id="optStudent" method="post">
+                                <a asp-action="MoveEdit" asp-route-id="@dto.StudentId" class="btn btn-primary">Edit</a>
+                                <a src="#" onclick="DeleteSomeStudent(@dto.StudentId)" class="btn btn-danger">Delete</a>
+                           </form>
+
                         </td>
                     </tr>
                 }
@@ -46,6 +50,54 @@
         $(function(){
             console.log('Loaded!');
         });
+    </script>
+
+    <script type="text/javascript">
+
+        function DisplaySomeMessage(messageHere)
+        {
+            Swal.fire({
+              icon: "success",
+              title: "Success",
+              text: messageHere,
+              footer: '<a href="#">some foote maybe</a>'
+            });
+        }
+
+    </script>
+
+    <script type="text/javascript">
+
+        function DeleteSomeStudent(id){
+           var token = $('input[name="__RequestVerificationToken"]').val();
+
+           $.ajax({
+                url: '@Url.Action("DeleteStudent", "Students")',
+                type: 'POST',
+                data: { StudentId: id}, 
+                headers: {
+                    "RequestVerificationToken": token
+                },
+                success: function (response) {
+
+                    if (response.error == false) {
+                        DisplaySomeMessage("Removed the user successfully.");
+
+                        setTimeout(function () {
+                            location.reload(); 
+                        }, 3000);
+
+                    } else {
+                        alert("Validation failed.");
+                    }
+                },
+                error: function () {
+                    alert("Error occurred.");
+                }
+            });
+
+        }
+
     </script>
 
 }

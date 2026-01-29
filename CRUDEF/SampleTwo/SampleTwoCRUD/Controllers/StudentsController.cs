@@ -112,4 +112,18 @@ public class StudentsController : Controller
 
         return View(dto);
     }
+
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public async Task<JsonResult> DeleteStudent(int StudentId)
+    {
+        var student = await _context.Students.FindAsync(StudentId);
+
+        if (student is not null)
+            _context.Students.Remove(student);
+        await _context.SaveChangesAsync();
+
+        return Json(new ResponseBox() { Data = student, ResponseText = "Success", Error = false});
+    }
+
 }
