@@ -1,11 +1,17 @@
 
-import './App.css'
+import './App.css';
+import Quiz from './components/quiz';
 
 function App() {
 
   return (
     <>
-      Hello World!
+      <div >
+        <h4 className='app-container'>Quiz Form Title</h4>
+
+        <Quiz />
+        
+      </div>
     </>
   )
 }
