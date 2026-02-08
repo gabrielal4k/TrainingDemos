@@ -8,9 +8,7 @@ function App() {
     <>
       <div >
         <h4 className='app-container'>Quiz Form Title</h4>
-
         <Quiz />
-        
       </div>
     </>
   )

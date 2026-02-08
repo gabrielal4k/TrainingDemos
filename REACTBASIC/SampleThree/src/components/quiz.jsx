@@ -1,6 +1,14 @@
+import React, { useState } from "react";
 
 
 function Quiz(){
+
+    // var selectedOption = "None";
+    function selectOptions(option){
+        // console.log(option);
+        // selectedOption = option;
+        setSelectOptions(option);
+    }
 
     const questionaires = [
 
@@ -27,8 +35,29 @@ function Quiz(){
 
     ]
 
+    const [selectedOption, setSelectOptions] = useState("None");
 
-    return <div className="card">Quiz</div>
+    return (
+    <div className="card">
+        <h2>Questionaire</h2>
+        <p className="question">{questionaires[0].question}</p>
+        
+        {questionaires[0].options.map((option) =>
+        <button key={option} className="primary-btn option" onClick={() => selectOptions(option)}>
+            {""}
+            {option}
+            </button>
+        )}
+
+        <p>Selected: {selectedOption}</p>
+
+        <div className="card-footer">
+            <button className="btn-secondary">Previous</button>
+            <button>Next</button>
+        </div>
+
+    </div>
+    )
 }
 
 export default Quiz;

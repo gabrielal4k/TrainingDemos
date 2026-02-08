@@ -83,7 +83,6 @@ button:focus-visible {
   transition: background-color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
-/* Primary button */
 .btn-primary {
   background-color: #007bff;
   border-color: #007bff;
@@ -95,11 +94,10 @@ button:focus-visible {
   border-color: #0062cc;
 }
 
-/* Secondary button */
 .btn-secondary {
-  background-color: #6c757d;
-  border-color: #6c757d;
-  color: #fff;
+  background-color: #6c757d  !important;
+  border-color: #6c757d  !important;
+  color: #fff  !important;
 }
 
 .btn-secondary:hover {
@@ -107,7 +105,6 @@ button:focus-visible {
   border-color: #545b62;
 }
 
-/* Success button */
 .btn-success {
   background-color: #28a745;
   border-color: #28a745;
@@ -119,7 +116,6 @@ button:focus-visible {
   border-color: #1e7e34;
 }
 
-/* Outline variant */
 .btn-outline-primary {
   background-color: transparent;
   border-color: #007bff;
@@ -130,3 +126,31 @@ button:focus-visible {
   background-color: #007bff;
   color: #fff;
 }
+
+.option{
+  width: 100%;
+}
+
+.card-footer {
+  display: flex;
+  justify-content: flex-end; /* push buttons to the right end */
+  gap: 10px; /* spacing between buttons */
+  margin-top: 16px;
+}
+
+
+
+/* .primary-btn {
+  background-color: #007bff;  
+  color: white;              
+  padding: 10px 20px;         
+  border: none;                
+  border-radius: 5px;          
+  font-size: 16px;             
+  cursor: pointer;             
+  transition: background-color 0.3s ease; 
+}
+
+.primary-btn:hover {
+  background-color: #0056b3;   
+} */
