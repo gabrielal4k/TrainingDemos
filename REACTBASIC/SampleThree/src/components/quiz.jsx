@@ -3,11 +3,22 @@ import React, { useState } from "react";
 
 function Quiz(){
 
-    // var selectedOption = "None";
     function selectOptions(option){
-        // console.log(option);
-        // selectedOption = option;
-        setSelectOptions(option);
+        const newUserAnswer = [...userAnswers]
+        newUserAnswer[currentQuestion] = option;
+
+        setUserAnswers(newUserAnswer);
+    }
+
+    function NextQuestion(){
+        setCurrentQuestion(currentQuestion + 1);
+    }
+    
+    function PreviousQuestion(){
+
+        if(currentQuestion > 0){
+            setCurrentQuestion(currentQuestion - 1);
+        }
     }
 
     const questionaires = [
@@ -35,12 +46,16 @@ function Quiz(){
 
     ]
 
-    const [selectedOption, setSelectOptions] = useState("None");
+    const preAnswers = [null,null,null];
+
+    const [userAnswers, setUserAnswers] = useState(preAnswers);
+
+    const [currentQuestion, setCurrentQuestion] = useState(0);
 
     return (
     <div className="card">
         <h2>Questionaire</h2>
-        <p className="question">{questionaires[0].question}</p>
+        <p className="question">{questionaires[currentQuestion].question}</p>
         
         {questionaires[0].options.map((option) =>
         <button key={option} className="primary-btn option" onClick={() => selectOptions(option)}>
@@ -49,11 +64,11 @@ function Quiz(){
             </button>
         )}
 
-        <p>Selected: {selectedOption}</p>
+        {/* <p>Selected: {selectedOption}</p> */}
 
         <div className="card-footer">
-            <button className="btn-secondary">Previous</button>
-            <button>Next</button>
+            <button onClick={PreviousQuestion} disabled={currentQuestion === 0} className="btn-primary" >Previous</button>
+            <button onClick={NextQuestion} disabled={currentQuestion === 2 }  className="btn-primary">Next</button>
         </div>
 
     </div>

@@ -138,7 +138,12 @@ button:focus-visible {
   margin-top: 16px;
 }
 
-
+.btn-primary:disabled,
+.btn-primary.disabled {
+  background-color: #6c757d !important; 
+  border-color: #6c757d !important;      
+  color: #ffffff !important;          
+}
 
 /* .primary-btn {
   background-color: #007bff;  
