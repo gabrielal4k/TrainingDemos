@@ -131,6 +131,10 @@ button:focus-visible {
   width: 100%;
 }
 
+.selected-option{
+  background-color: green !important;
+}
+
 .card-footer {
   display: flex;
   justify-content: flex-end; /* push buttons to the right end */

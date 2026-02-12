@@ -47,18 +47,17 @@ function Quiz(){
     ]
 
     const preAnswers = [null,null,null];
-
     const [userAnswers, setUserAnswers] = useState(preAnswers);
-
     const [currentQuestion, setCurrentQuestion] = useState(0);
+    const selectedAnswer = userAnswers[currentQuestion];
 
     return (
     <div className="card">
         <h2>Questionaire</h2>
         <p className="question">{questionaires[currentQuestion].question}</p>
         
-        {questionaires[0].options.map((option) =>
-        <button key={option} className="primary-btn option" onClick={() => selectOptions(option)}>
+        {questionaires[currentQuestion].options.map((option) =>
+        <button key={option} className={"primary-btn option" + (selectedAnswer === option ? " selected-option" : "")} onClick={() => selectOptions(option)}>
             {""}
             {option}
             </button>
@@ -67,8 +66,12 @@ function Quiz(){
         {/* <p>Selected: {selectedOption}</p> */}
 
         <div className="card-footer">
-            <button onClick={PreviousQuestion} disabled={currentQuestion === 0} className="btn-primary" >Previous</button>
-            <button onClick={NextQuestion} disabled={currentQuestion === 2 }  className="btn-primary">Next</button>
+            <button onClick={PreviousQuestion} disabled={currentQuestion === 0} className="btn-primary" >
+                Previous
+            </button>
+            <button onClick={NextQuestion} disabled={!selectedAnswer}  className="btn-primary">
+                {currentQuestion === questionaires.length - 1? "Finish" : "Next"}
+            </button>
         </div>
 
     </div>
