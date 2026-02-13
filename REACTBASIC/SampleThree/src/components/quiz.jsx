@@ -52,8 +52,8 @@ function Quiz(){
     const selectedAnswer = userAnswers[currentQuestion];
 
     return (
-    <div className="card">
-        <h2>Questionaire</h2>
+    <div className="">
+    <h2>Questionaire {currentQuestion + 1}</h2>
         <p className="question">{questionaires[currentQuestion].question}</p>
         
         {questionaires[currentQuestion].options.map((option) =>

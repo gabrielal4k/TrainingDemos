@@ -1,14 +1,17 @@
 
 import './App.css';
 import Quiz from './components/quiz';
-
+import GenerateResults from './components/results';
 function App() {
 
   return (
     <>
       <div >
-        <h4 className='app-container'>Quiz Form Title</h4>
+        <div className='app-container card'>Quiz Form Title
         <Quiz />
+        <GenerateResults />
+        </div>
+      
       </div>
     </>
   )
