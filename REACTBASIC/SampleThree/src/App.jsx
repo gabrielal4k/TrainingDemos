@@ -9,7 +9,6 @@ function App() {
       <div >
         <div className='app-container card'>Quiz Form Title
         <Quiz />
-        <GenerateResults />
         </div>
       
       </div>

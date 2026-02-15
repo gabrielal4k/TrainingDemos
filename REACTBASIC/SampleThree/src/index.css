@@ -149,6 +149,12 @@ button:focus-visible {
   color: #ffffff !important;          
 }
 
+
+.result-footer {
+  display: flex;
+  justify-content: center; 
+  align-items: center;  
+}
 /* .primary-btn {
   background-color: #007bff;  
   color: white;              

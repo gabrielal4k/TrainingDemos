@@ -1,28 +1,15 @@
 import React, { useState } from "react";
-
+import GenerateResults from './results';
 
 function Quiz(){
 
-    function selectOptions(option){
-        const newUserAnswer = [...userAnswers]
-        newUserAnswer[currentQuestion] = option;
+    const preAnswers = [null,null,null];
+    const [userAnswers, setUserAnswers] = useState(preAnswers);
+    const [currentQuestion, setCurrentQuestion] = useState(0);
+    const selectedAnswer = userAnswers[currentQuestion];
 
-        setUserAnswers(newUserAnswer);
-    }
-
-    function NextQuestion(){
-        setCurrentQuestion(currentQuestion + 1);
-    }
-    
-    function PreviousQuestion(){
-
-        if(currentQuestion > 0){
-            setCurrentQuestion(currentQuestion - 1);
-        }
-    }
-
+    const [flagFinished, setFlagFinished] = useState(false);
     const questionaires = [
-
         {
             question: "What is the capital of France?",
             options: ["Berlin", "London", "Paris", "Rome"],
@@ -30,7 +17,7 @@ function Quiz(){
         },
         {
             question: "Which language is used for web apps",
-            options: [".NET", "PHP", "Javascript", "HTML"],
+            options: [".NET", "PHP", "Javascript", "All"],
             answer: "All"
         },
         {
@@ -44,12 +31,41 @@ function Quiz(){
             answer: "Javascript XML"
         },
 
-    ]
+    ];
 
-    const preAnswers = [null,null,null];
-    const [userAnswers, setUserAnswers] = useState(preAnswers);
-    const [currentQuestion, setCurrentQuestion] = useState(0);
-    const selectedAnswer = userAnswers[currentQuestion];
+    function selectOptions(option){
+        const newUserAnswer = [...userAnswers]
+        newUserAnswer[currentQuestion] = option;
+
+        setUserAnswers(newUserAnswer);
+    }
+
+    function NextQuestion(){
+        if(currentQuestion === questionaires.length - 1)
+        {
+            setFlagFinished(true);
+        }else{
+            setCurrentQuestion(currentQuestion + 1);
+        }
+    }
+    
+    function PreviousQuestion(){
+
+        if(currentQuestion > 0){
+            setCurrentQuestion(currentQuestion - 1);
+        }
+    }
+
+    function restartQuiz(){
+        setUserAnswers(preAnswers);
+        setCurrentQuestion(0);
+        setFlagFinished(false);
+    };
+
+
+    if(flagFinished){
+    return <GenerateResults userAnswers={userAnswers} questionaires={questionaires} restartQuiz={restartQuiz}/>
+    }
 
     return (
     <div className="">
