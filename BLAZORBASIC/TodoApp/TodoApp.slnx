@@ -1,3 +1,6 @@
 <Solution>
+  <Project Path="Todo.Contracts/Todo.Contracts.csproj" Id="936ea76d-54f7-4e92-b920-fc1c4564b7fd" />
+  <Project Path="Todo.DA/Todo.DA.csproj" Id="4391a36a-9766-481b-b97f-7bb4ec12e9e8" />
+  <Project Path="Todo.Service/Todo.Service.csproj" Id="e5bed96d-bc6e-4f6f-803d-0a3df5990b94" />
   <Project Path="TodoApp.API/TodoApp.API.csproj" />
 </Solution>
