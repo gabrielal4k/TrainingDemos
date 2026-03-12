@@ -11,6 +11,7 @@ public class EventController : ControllerBase
     {
        
     }
+
     [Route("getme")]
     public IActionResult GetMe()
     {

@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Todo.Service
 {
-    internal class InfrastucturerService
+    public class InfrastucturerService
     {
     }
 }
