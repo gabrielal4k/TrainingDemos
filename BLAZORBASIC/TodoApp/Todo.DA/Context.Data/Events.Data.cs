@@ -30,4 +30,18 @@ public class Events : IEvents
 
         return dto;
     }
+
+    public List<Event> GetEvents()
+    {
+        var dtos = _context.Events.OrderByDescending(e => e.EventID).ToList();
+
+        return dtos;
+    }
+
+    public Event GetEvent(int eventID)
+    {
+        var dto = _context.Events.Find(eventID);
+
+        return dto;
+    }
 }

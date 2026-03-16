@@ -9,4 +9,6 @@ public interface IEvents
 {
     Task<Event> AddEventAsync(Event dto);
     Event AddEvent(Event dto);
+    List<Event> GetEvents();
+    Event GetEvent(int eventID);
 }

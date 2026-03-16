@@ -1,6 +1,10 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Todo.Contracts.DTO;
+using Todo.Contracts.Interface.Data;
+using Todo.Contracts.Interface.Service;
 using Todo.DA;
+using Todo.DA.Context.Data;
+using Todo.Service.Module;
 
 namespace TodoApp.API.Injections;
 
@@ -40,6 +44,20 @@ public static class ServiceInjection
         //        configuration.GetSection("AppSettings").Bind(settings);
         //    });
 
+        return services;
+    }
+
+    public static IServiceCollection AddDomainServices(this IServiceCollection services)
+    {
+        services.AddScoped<IEventService, EventService>();
+        services.AddScoped<IEvents, Events>();
+        return services;
+    }
+
+    public static IServiceCollection AddSwaggerOpenApi(this IServiceCollection services)
+    {
+        services.AddEndpointsApiExplorer();
+        services.AddSwaggerGen();
         return services;
     }
 

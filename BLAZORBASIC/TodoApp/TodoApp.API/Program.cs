@@ -7,7 +7,8 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 builder.Services
     .AddConfigurationOptions()
-    .AddDbConfiguration(builder.Configuration);
+    .AddDbConfiguration(builder.Configuration)
+    .AddDomainServices();
 
 // Register Swagger services
 //builder.Services.AddEndpointsApiExplorer();
