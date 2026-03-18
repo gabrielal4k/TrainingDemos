@@ -1,13 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Todo.Contracts.DTO;
 using Todo.Contracts.Entities;
 
 namespace Todo.Contracts.Interface.Service;
 
 public interface IEventService
 {
-    Event AddDTOEvent(Event dto);
+    DTOEvent AddDTOEvent(DTOEvent dto);
+    DTOEvent EditDTOEvent(DTOEvent dto);
+    ResultResponse DeleteDTOEvent(int eventID);
     List<Event> GetDTOEvents();
     Event GetDTOEvent(int eventID);
 }

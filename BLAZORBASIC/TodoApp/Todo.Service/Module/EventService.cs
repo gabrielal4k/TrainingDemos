@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Todo.Contracts.DTO;
 using Todo.Contracts.Entities;
 using Todo.Contracts.Interface.Data;
 using Todo.Contracts.Interface.Service;
@@ -15,15 +16,63 @@ public class EventService(IEvents _event) : IEventService
     //    xevent = _event;
     //}
 
-    public Event AddDTOEvent(Event dto)
+    public DTOEvent AddDTOEvent(DTOEvent dto)
     {
         if (dto is null)
             return dto;
 
-        _event.AddEvent(dto);
+        Event entt = new()
+        {
+            Title = dto.Title,
+            Description = dto.Description,
+            Start = dto.Start,
+            End = dto.End,
+            AllDay = dto.AllDay,
+            CreatedAt = DateTime.Now
+        };
+
+        _event.AddEvent(entt);
 
         return dto;
     }
+    public DTOEvent EditDTOEvent(DTOEvent dto)
+    {
+        if (dto is null)
+            return dto;
+
+        Event entt = new()
+        {
+            Title = dto.Title,
+            Description = dto.Description,
+            Start = dto.Start,
+            End = dto.End,
+            AllDay = dto.AllDay,
+            CreatedAt = DateTime.Now
+        };
+
+        _event.AddEvent(entt);
+
+        return dto;
+    }
+
+    public ResultResponse DeleteDTOEvent(int eventID)
+    {
+        if (eventID is 0)
+            return new()
+            {
+                IsSuccess = false,
+                Message = "EventID is required.",
+            };
+
+        _event.DeleteEvent(eventID);
+
+        return new()
+        {
+            IsSuccess = true,
+            Message = "Event deleted successfully.",
+        };
+    }
+
 
     public List<Event> GetDTOEvents()
     {

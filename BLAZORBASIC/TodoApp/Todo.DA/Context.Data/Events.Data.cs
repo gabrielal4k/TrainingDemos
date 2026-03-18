@@ -30,6 +30,39 @@ public class Events : IEvents
 
         return dto;
     }
+    public Event EditEvent(Event dto)
+    {
+        var mDTO = _context.Events.Find(dto.EventID);
+
+        if (mDTO is null)
+            return mDTO;
+
+        mDTO.Title = dto.Title;
+        mDTO.Description = dto.Description;
+        mDTO.Start = dto.Start;
+        mDTO.End = dto.End;
+        mDTO.AllDay = dto.AllDay;
+
+        _context.Update(mDTO);
+        _context.SaveChanges();
+
+        return mDTO;
+    }
+
+    public bool DeleteEvent(int eventID)
+    {
+        var mDTO = _context.Events.Find(eventID);
+
+        if (mDTO is null)
+            return false;
+
+        _context.Events.Remove(mDTO);   
+        _context.SaveChanges();
+
+        return true;
+    }
+
+
 
     public List<Event> GetEvents()
     {

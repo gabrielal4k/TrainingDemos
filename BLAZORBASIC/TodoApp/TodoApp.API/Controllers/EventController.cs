@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Data;
+using Todo.Contracts.DTO;
 using Todo.Contracts.Interface.Service;
 
 namespace TodoApp.API.Controllers;
@@ -40,5 +42,22 @@ public class EventController : ControllerBase
             return NotFound();
 
         return Ok(dto);
+    }
+
+
+    [HttpPost, Route("add")]
+    public IActionResult GetEvent(DTOEvent dto)
+    {
+        dto = _eventService.AddDTOEvent(dto);
+
+        return dto is null ? NoContent() : Ok(dto);
+    }
+
+    [HttpPut, Route("edit")]
+    public IActionResult EditEvent(DTOEvent dto)
+    {
+        dto = _eventService.EditDTOEvent(dto);
+
+        return dto is null ? NoContent() : Ok(dto);
     }
 }

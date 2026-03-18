@@ -11,4 +11,6 @@ public interface IEvents
     Event AddEvent(Event dto);
     List<Event> GetEvents();
     Event GetEvent(int eventID);
+    Event EditEvent(Event dto);
+    bool DeleteEvent(int eventID);
 }
