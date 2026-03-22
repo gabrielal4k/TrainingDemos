@@ -60,4 +60,12 @@ public class EventController : ControllerBase
 
         return dto is null ? NoContent() : Ok(dto);
     }
+
+    [HttpDelete, Route("delete")]
+    public IActionResult DeleteEvent(int eventID)
+    {
+        var res = _eventService.DeleteDTOEvent(eventID);
+
+        return res is null ? NoContent() : Ok(res);
+    }
 }
