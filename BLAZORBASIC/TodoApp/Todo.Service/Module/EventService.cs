@@ -1,6 +1,8 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Text.Json.Nodes;
 using Todo.Contracts.DTO;
 using Todo.Contracts.Entities;
 using Todo.Contracts.Interface.Data;
@@ -74,9 +76,27 @@ public class EventService(IEvents _event) : IEventService
     }
 
 
-    public List<Event> GetDTOEvents()
+    public List<DTOEvent> GetDTOEvents()
     {
-       return  _event.GetEvents();
+        var entt = _event.GetEvents();
+        List<DTOEvent> listDTO = new ();
+
+        foreach (var e in entt)
+        {
+            var dto = new DTOEvent()
+            {
+                Title = e.Title,
+                Description = e.Description,
+                Start = e.Start,
+                End = e.End,
+                AllDay = e.AllDay,
+                CreatedAt = e.CreatedAt
+            };
+
+            listDTO.Add(dto);
+        }
+
+        return listDTO;
     }
 
     public Event GetDTOEvent(int eventID)

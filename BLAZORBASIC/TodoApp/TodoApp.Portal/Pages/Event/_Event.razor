@@ -2,6 +2,52 @@
 
 <h3>Event List</h3>
 
-@code {
+@if(events is  null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <div>
+        <div>
+            <a class="btn btn-primary mb-3"> Add Event</a>
+        </div>
+        <div>
+            <table class="table mb-3">
+                <thead>
+                    <tr>
+                        <th>Event</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var dto in events)
+                    {
+                        <tr>
+                            <td>@dto.Title</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+}
 
+
+@inject HttpClient _http
+
+@code {
+    private List<DTOEvent>? events;
+
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            events = await _http.GetFromJsonAsync<List<DTOEvent>>("api/event/get/list");
+        }
+        catch(Exception ex)
+        {
+            // Handle error
+        }
+        // StateHasChanged();
+    }
 }

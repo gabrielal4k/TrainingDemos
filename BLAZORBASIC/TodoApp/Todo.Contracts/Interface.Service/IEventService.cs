@@ -11,6 +11,6 @@ public interface IEventService
     DTOEvent AddDTOEvent(DTOEvent dto);
     DTOEvent EditDTOEvent(DTOEvent dto);
     ResultResponse DeleteDTOEvent(int eventID);
-    List<Event> GetDTOEvents();
+    List<DTOEvent> GetDTOEvents();
     Event GetDTOEvent(int eventID);
 }
