@@ -17,6 +17,14 @@ else
                 <thead>
                     <tr>
                         <th>Event</th>
+                        <th>Description</th>
+                        <th>Start</th>
+                        <th>Start</th>
+                        <th>
+                            <span>
+                                <i class="fa-solid fa-gears"></i>
+                            </span>
+                        </th>
                     </tr>
                 </thead>
                 <tbody>
@@ -24,14 +32,33 @@ else
                     {
                         <tr>
                             <td>@dto.Title</td>
+                            <td>@dto.Description</td>
+                            <td>@dto.Start.Value.ToShortDateString()</td>
+                            <td>
+                                @if (@dto.AllDay)
+                                {
+                                    <span class="badge bg-info">Yes</span>
+                                }
+                                else
+                                {
+                                    <span class="badge bg-warning">No</span>
+                                }
+                            </td>
+                            <td>
+                                <a href="#" class="btn btn-primary btn-sm">Edit</a>
+                                <button class="btn btn-danger btn-sm">Delete</button>
+                            </td>
                         </tr>
+
+
                     }
                 </tbody>
             </table>
         </div>
     </div>
-}
 
+
+}
 
 @inject HttpClient _http
 
@@ -46,8 +73,9 @@ else
         }
         catch(Exception ex)
         {
-            // Handle error
+            throw;    
         }
         // StateHasChanged();
     }
+
 }
