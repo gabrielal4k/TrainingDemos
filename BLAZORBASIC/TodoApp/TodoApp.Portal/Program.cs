@@ -8,8 +8,8 @@ builder.RootComponents.Add<App>("#app");
 builder.RootComponents.Add<HeadOutlet>("head::after");
 
 //builder.HostEnvironment.BaseAddress = "https://localhost:4000";
+builder.Services.AddMudServices();
 
 builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri("https://localhost:4000") });
-builder.Services.AddMudServices();
 
 await builder.Build().RunAsync();

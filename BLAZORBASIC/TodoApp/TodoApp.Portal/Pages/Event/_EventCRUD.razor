@@ -1,26 +1,45 @@
-﻿<div class="modal fade @(IsVisible ? "show d-block" : "")" tabindex="-1" role="dialog">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">@Title</h5>
-                <button type="button" class="btn-close" @onclick="Close"></button>
-            </div>
-            <div class="modal-body">
-                @ChildContent
-            </div>
-            <div class="modal-footer">
-                <button class="btn btn-secondary" @onclick="Close">Close</button>
-            </div>
-        </div>
-    </div>
-</div>
+﻿@using MudBlazor
+@using System.ComponentModel.DataAnnotations
+
+<MudDialog>
+    <DialogContent>
+        <MudText Typo="Typo.h6" Class="">@Title</MudText>
+
+        <EditForm Model="@EventDTO" OnValidSubmit="Save">
+            <DataAnnotationsValidator />
+            <ValidationSummary />
+
+            <MudTextField @bind-Value="EventDTO.Title" Label="Event Title" Required="true" />
+            <MudTextField @bind-Value="EventDTO.Description" Label="Event Title" Required="true" />
+
+            <MudButton Color="Color.Primary" Type="Submit">Save</MudButton>
+        </EditForm>
+    </DialogContent>
+    <DialogActions>
+        <MudButton Color="Color.Secondary" OnClick="Cancel">Cancel</MudButton>
+    </DialogActions>
+</MudDialog>
 
 @code {
-    [Parameter] public string Title { get; set; } = "Event Modal";
-    [Parameter] public RenderFragment? ChildContent { get; set; }
+    [CascadingParameter] 
+    IMudDialogInstance MudDialog { get; set; } = default!;
 
-    private bool IsVisible { get; set; }
+    [Parameter] 
+    public string Title { get; set; } = "Event Form";
 
-    public void Show() => IsVisible = true;
-    public void Close() => IsVisible = false;
+    [Parameter]
+    public DTOEvent EventDTO { get; set; } = new();
+
+    private void Save()
+    {
+        MudDialog.Close(DialogResult.Ok(EventDTO));
+    }
+
+    private void Cancel() => MudDialog.Cancel();
+
+    // public class EventModel
+    // {
+    //     [Required] public string Title { get; set; } = "";
+    //     [Required] public DateTime Date { get; set; } = DateTime.Now;
+    // }
 }

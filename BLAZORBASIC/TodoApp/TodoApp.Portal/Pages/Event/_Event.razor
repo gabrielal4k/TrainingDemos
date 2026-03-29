@@ -1,8 +1,12 @@
 ﻿@page "/event"
+@using MudBlazor
+@using Todo.Contracts;
+
+@inject IDialogService DialogService
 
 <h3>Event List</h3>
 
-@if(events is  null)
+@if (events is null)
 {
     <p><em>Loading...</em></p>
 }
@@ -57,7 +61,16 @@ else
         </div>
     </div>
 
+    @inject IDialogService DialogService
 
+    <MudButton Color="Color.Dark" OnClick="OpenModal">
+        Open Event Modal TEST
+    </MudButton>
+
+    
+    <MudButton OnClick="OpenDialogAsync" Variant="Variant.Filled" Color="Color.Primary">
+        Options dialog TEST
+    </MudButton>
 }
 
 @inject HttpClient _http
@@ -71,11 +84,53 @@ else
         {
             events = await _http.GetFromJsonAsync<List<DTOEvent>>("api/event/get/list");
         }
-        catch(Exception ex)
+        catch (Exception ex)
         {
-            throw;    
+            throw;
         }
         // StateHasChanged();
+    }
+
+
+
+    //modal
+    private async Task OpenModal()
+    {
+
+        DTOEvent dto = new()
+        {
+            Title = "Test",
+            Description = "wetf"
+        };
+
+        var parameters = new DialogParameters<_EventCRUD>
+        {
+            { x => x.EventDTO, dto },
+            { x => x.Title, "New Event"}
+        };
+
+        var options = new DialogOptions()
+        {
+            MaxWidth = MaxWidth.Small,
+            FullWidth = true
+        };
+        var dialog = await DialogService.ShowAsync<_EventCRUD>("Event", parameters, options);
+        var result = await dialog.Result;
+
+        if (!result.Canceled)
+        {
+            Console.WriteLine(result.Data);
+            //In a real world scenario we would reload the data from the source here since we "removed" it in the dialog already.
+            // Guid.TryParse(result.Data.ToString(), out Guid deletedServer);
+            //Servers.RemoveAll(item => item.Id == deletedServer);
+        }
+
+    }
+
+
+    private Task OpenDialogAsync()
+    {
+        return DialogService.ShowAsync<DialogSample>("Options Dialog");
     }
 
 }
